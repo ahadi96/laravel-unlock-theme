@@ -17,3 +17,4 @@ Route::get('/about','HomeController@about');
 Route::get('/contact-us','HomeController@contactUs');
 
 Route::get('query','HomeController@query');
+Route::get('category','HomeController@category');

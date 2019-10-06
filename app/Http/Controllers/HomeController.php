@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -65,5 +67,21 @@ class HomeController extends Controller
         }
         
         dd($firstProduct);
+    }
+
+    public function category(){
+        $firstCategory = Category::first();
+    
+        $products = Product::where('category_id',$firstCategory->id)->get();
+
+        $addProduct = Product::create([
+            'name'=>'Pipsi',
+            'category_id'=>2,
+            'expire_date'=>date('Y-m-d'),
+            'test'=>'islam',
+            
+        ]);
+
+        dd($products);
     }
 }
