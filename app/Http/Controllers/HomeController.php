@@ -32,29 +32,30 @@ class HomeController extends Controller
         return view('contact_us');
     }
 
-    public function query(){
+    public function query()
+    {
         $categories = DB::table('categories')->get();
 
-        
 
-        $facebook = DB::table('products')->select('id','name')
-        ->where('name','!=','Facebook')->get();
+
+        $facebook = DB::table('products')->select('id', 'name')
+            ->where('name', '!=', 'Facebook')->get();
 
         // select id,name from products where name!='facebook';
 
         DB::table('products')->insert([
-            'name'=>'Github',
-            'category_id'=>1,
-            'expire_date'=>date('Y-m-d')
+            'name' => 'Github',
+            'category_id' => 1,
+            'expire_date' => date('Y-m-d')
         ]);
 
 
-        DB::table('products')->where('name','Github')->update([
-            'name'=>'Gitlab'
+        DB::table('products')->where('name', 'Github')->update([
+            'name' => 'Gitlab'
         ]);
 
         $products = DB::table('products')->get();
-        
+
         // resut as array
         // $products = DB::table('products')->get()->toArray();
 
@@ -65,46 +66,50 @@ class HomeController extends Controller
         // stdClass $results->item
         // Array $results['item'] or $results[index] // index 0,1,2,.... length of the array
 
-        if($firstProduct){
-            DB::table('products')->where('id',$firstProduct->id)->delete();
+        if ($firstProduct) {
+            DB::table('products')->where('id', $firstProduct->id)->delete();
         }
-        
+
         dd($firstProduct);
     }
 
-    public function category(){
+    public function category()
+    {
         $firstCategory = Category::first();
-    
-        $products = Product::where('category_id',$firstCategory->id)->get();
+
+        $products = Product::where('category_id', $firstCategory->id)->get();
 
         $addProduct = Product::create([
-            'name'=>'Pipsi',
-            'category_id'=>2,
-            'expire_date'=>date('Y-m-d'),
-            'test'=>'islam',
-            
+            'name' => 'Pipsi',
+            'category_id' => 2,
+            'expire_date' => date('Y-m-d'),
+            'test' => 'islam',
+
         ]);
 
         dd($products);
     }
 
-    public function client($id){
+    public function client($id)
+    {
         $client = Client::find($id);
-        if($client){
+        if ($client) {
             dd($client->clientAddresses);
         }
 
         return 'error';
     }
 
-    public function clientDetails(){
-        $clientDetails = ClientDetail::with('client')->where('nationality','ks')->first();
+    public function clientDetails()
+    {
+        $clientDetails = ClientDetail::with('client')->where('nationality', 'ks')->first();
         //dd($clientDetails);
         dd($clientDetails->client->first_name);
     }
 
-    public function clientAddresses(){
-        $address = Address::where('city','gaza')->first();
+    public function clientAddresses()
+    {
+        $address = Address::where('city', 'gaza')->first();
         dd($address->client);
     }
 }
