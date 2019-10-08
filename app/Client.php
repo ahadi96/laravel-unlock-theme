@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-    protected $fillable = ['first_name','last_name','mobile'];
+    protected $fillable = ['first_name','last_name','mobile_number'];
 
     public function details(){
         return $this->hasOne(ClientDetail::class);

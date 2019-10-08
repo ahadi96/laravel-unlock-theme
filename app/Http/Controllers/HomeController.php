@@ -112,4 +112,28 @@ class HomeController extends Controller
         $address = Address::where('city', 'gaza')->first();
         dd($address->client);
     }
+
+    public function addClient(){
+
+        // create a new client
+        $client = Client::create([
+            'first_name'=>'Ismail',
+            'last_name'=>'Hassan',
+            'mobile_number'=>'0566666',
+        ]);
+
+        // to get the client id: $client->id
+        
+        // create client details object
+        $details = new ClientDetail([
+            'nationality'=>'de',
+            'identity_number'=>'444444',
+            'dob'=>date('Y-m-d')
+        ]);
+
+        // insert client details object to related client 
+        $client->details()->save($details);
+
+        dd($client);
+    }
 }

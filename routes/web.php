@@ -22,3 +22,4 @@ Route::get('category','HomeController@category');
 Route::get('client/{id}','HomeController@client');
 Route::get('client-details','HomeController@clientDetails');
 Route::get('client-addresses','HomeController@clientAddresses');
+Route::get('add-client','HomeController@addClient');
