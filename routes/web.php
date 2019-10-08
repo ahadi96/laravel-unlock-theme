@@ -18,3 +18,5 @@ Route::get('/contact-us','HomeController@contactUs');
 
 Route::get('query','HomeController@query');
 Route::get('category','HomeController@category');
+
+Route::get('client/{id}','HomeController@client');

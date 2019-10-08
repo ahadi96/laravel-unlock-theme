@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Client;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -83,5 +84,14 @@ class HomeController extends Controller
         ]);
 
         dd($products);
+    }
+
+    public function client($id){
+        $client = Client::find($id);
+        if($client){
+            dd($client->details->identity_number);
+        }
+
+        return 'error';
     }
 }
