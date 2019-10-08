@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Address;
 use App\Category;
 use App\Client;
 use App\ClientDetail;
@@ -90,7 +91,7 @@ class HomeController extends Controller
     public function client($id){
         $client = Client::find($id);
         if($client){
-            dd($client->details->identity_number);
+            dd($client->clientAddresses);
         }
 
         return 'error';
@@ -100,5 +101,10 @@ class HomeController extends Controller
         $clientDetails = ClientDetail::with('client')->where('nationality','ks')->first();
         //dd($clientDetails);
         dd($clientDetails->client->first_name);
+    }
+
+    public function clientAddresses(){
+        $address = Address::where('city','gaza')->first();
+        dd($address->client);
     }
 }
