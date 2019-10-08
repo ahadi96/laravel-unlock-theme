@@ -124,15 +124,22 @@ class HomeController extends Controller
 
         // to get the client id: $client->id
         
+        // // save client details object
+        // $details = new ClientDetail([
+        //     'nationality'=>'de',
+        //     'identity_number'=>'444444',
+        //     'dob'=>date('Y-m-d')
+        // ]);
+
+        // // insert client details object to related client 
+        // $client->details()->save($details);
+
         // create client details object
-        $details = new ClientDetail([
+        $client->details()->create([
             'nationality'=>'de',
             'identity_number'=>'444444',
             'dob'=>date('Y-m-d')
         ]);
-
-        // insert client details object to related client 
-        $client->details()->save($details);
 
         dd($client);
     }
