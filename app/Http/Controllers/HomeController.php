@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Client;
+use App\ClientDetail;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -93,5 +94,11 @@ class HomeController extends Controller
         }
 
         return 'error';
+    }
+
+    public function clientDetails(){
+        $clientDetails = ClientDetail::with('client')->where('nationality','ks')->first();
+        //dd($clientDetails);
+        dd($clientDetails->client->first_name);
     }
 }
