@@ -6,7 +6,11 @@ use App\Address;
 use App\Category;
 use App\Client;
 use App\ClientDetail;
+use App\Course;
 use App\Product;
+use App\StudentClass;
+use App\Teacher;
+use App\Trainer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -113,17 +117,18 @@ class HomeController extends Controller
         dd($address->client);
     }
 
-    public function addClient(){
+    public function addClient()
+    {
 
         // create a new client
         $client = Client::create([
-            'first_name'=>'Ismail',
-            'last_name'=>'Hassan',
-            'mobile_number'=>'0566666',
+            'first_name' => 'Ismail',
+            'last_name' => 'Hassan',
+            'mobile_number' => '0566666',
         ]);
 
         // to get the client id: $client->id
-        
+
         // // save client details object
         // $details = new ClientDetail([
         //     'nationality'=>'de',
@@ -136,11 +141,51 @@ class HomeController extends Controller
 
         // create client details object
         $client->details()->create([
-            'nationality'=>'de',
-            'identity_number'=>'444444',
-            'dob'=>date('Y-m-d')
+            'nationality' => 'de',
+            'identity_number' => '444444',
+            'dob' => date('Y-m-d')
         ]);
 
         dd($client);
+    }
+
+    // many-many relations
+    public function teachers()
+    {
+        // return all teachers
+        $teachers = Teacher::all();
+
+        // return all classes
+        $classes = StudentClass::all();
+
+        // return the first teacher
+
+        $firstTeacher = Teacher::where('id', 2)->with('classes')->first();
+        foreach ($firstTeacher->classes as $class) {
+            echo $class->class_name;
+            echo '<br>';
+        }
+    }
+
+    // many-many relations
+    public function trainers($id)
+    {
+        // return all trainers
+        $trainers = Trainer::all();
+
+
+        // return all courses
+        $courses = Course::all();
+
+        // return the selected trainer
+        $trainer = Trainer::find($id);
+        if ($trainer) {
+            foreach ($trainer->courses as $course) {
+                echo $trainer->name . ' - ' . $course->name;
+                echo '<br>';
+            }
+        } else {
+            return 'no trainer selected';
+        }
     }
 }
