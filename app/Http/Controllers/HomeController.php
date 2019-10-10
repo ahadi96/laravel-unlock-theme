@@ -173,7 +173,6 @@ class HomeController extends Controller
         // return all trainers
         $trainers = Trainer::all();
 
-
         // return all courses
         $courses = Course::all();
 
@@ -187,5 +186,60 @@ class HomeController extends Controller
         } else {
             return 'no trainer selected';
         }
+    }
+
+    public function createTrainerCourse()
+    {
+        // create new trainer 
+        $trainer = new Trainer;
+        $trainer->name = 'Saeed ' . rand();
+        $trainer->save();
+
+        // create new course
+
+        $course = new Course;
+        $course->name = 'Laravel ' . rand();
+        $course->save();
+
+        // return last three courses
+        $lastThreeCourses = $course::orderBy('created_at', 'desc')->take(3)->get();
+
+        // attach/add courses to trainer
+        $trainer->courses()->attach($lastThreeCourses);
+
+        // un-assign course from trainer
+        $trainer->courses()->detach($course->id);
+
+        // using sync 
+
+        /*
+        trainer = 1
+        trianer courses = [1,2,3]
+
+        course_trainer 
+        1 - 1
+        1 - 2
+        1 - 3
+
+        trainer->courses()->sync([1,4,3]);
+        no change
+        1 - 1
+        1 - 3
+
+        add 
+        1 - 4
+
+        remove 
+        1 - 2
+        */
+
+
+
+        $trainer->courses()->sync([1, 3, 5]);
+        dd($lastThreeCourses);
+
+        // select last three courses 
+
+        // assign/attach last 3 courses to the new teacher
     }
 }
