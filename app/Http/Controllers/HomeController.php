@@ -7,6 +7,9 @@ use App\Category;
 use App\Client;
 use App\ClientDetail;
 use App\Course;
+use App\Image;
+use App\Page;
+use App\Post;
 use App\Product;
 use App\StudentClass;
 use App\Teacher;
@@ -241,5 +244,49 @@ class HomeController extends Controller
         // select last three courses 
 
         // assign/attach last 3 courses to the new teacher
+    }
+
+    public function createPost()
+    {
+        // create a new post
+        $post = Post::create(['title' => rand() . ' post ']);
+
+        // create a new image
+        $image = new Image(
+            [
+                'image' => 'test/path/to/image_' . $post->id
+            ]
+        );
+
+        // assign the new image to the new post 
+        $post->image()->save($image);
+
+        // the first image drived form the relation name 
+        // the second image drived from the coulmn name from polymorph table 
+        dd($post->image->image);
+        //dd(Post::where('id',$post->id)->with('image')->get());
+        //dd($post);
+    }
+
+    public function createPage()
+    {
+        // create a new post
+        $page = Page::create(['title' => rand() . ' Page ']);
+
+        // create a new image
+        $image = new Image(
+            [
+                'image' => 'test/path/to/page_image_' . $page->id
+            ]
+        );
+
+        // assign the new image to the new post 
+        $page->image()->save($image);
+
+        // the first image drived form the relation name 
+        // the second image drived from the coulmn name from polymorph table 
+        dd($page->image->image);
+        //dd(Post::where('id',$post->id)->with('image')->get());
+        //dd($post);
     }
 }

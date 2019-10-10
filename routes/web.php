@@ -32,3 +32,7 @@ Route::get('trainers/{id}', 'HomeController@trainers');
 
 // add new trainer & course
 Route::get('create-trainer', 'HomeController@createTrainerCourse');
+
+// add new post with image
+Route::get('create-post', 'HomeController@createPost');
+Route::get('create-page', 'HomeController@createPage');
