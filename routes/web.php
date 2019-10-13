@@ -36,3 +36,5 @@ Route::get('create-trainer', 'HomeController@createTrainerCourse');
 // add new post with image
 Route::get('create-post', 'HomeController@createPost');
 Route::get('create-page', 'HomeController@createPage');
+
+Route::get('posts-countries','HomeController@postsByCountry');

@@ -6,6 +6,7 @@ use App\Address;
 use App\Category;
 use App\Client;
 use App\ClientDetail;
+use App\Country;
 use App\Course;
 use App\Image;
 use App\Page;
@@ -288,5 +289,13 @@ class HomeController extends Controller
         dd($page->image->image);
         //dd(Post::where('id',$post->id)->with('image')->get());
         //dd($post);
+    }
+
+    public function postsByCountry()
+    {
+        // return the country posts
+        $firstCountry = Country::first();
+
+        dd($firstCountry->posts);
     }
 }
