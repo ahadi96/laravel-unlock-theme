@@ -22,29 +22,39 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
+              @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+              @endif
+          
           <form action="{{ url('contact-us') }}" method="post" class="probootstrap-form mb-5">
             @csrf
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="fname">First Name</label>
-                    <input type="text" class="form-control" id="fname" name="first_name">
+                    <input type="text" class="form-control" id="fname" name="first_name" required value="{{ old('first_name') }}">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="lname">Last Name</label>
-                    <input type="text" class="form-control" id="lname" name="last_name">
+                  <input type="text" class="form-control" id="lname" name="last_name" value="{{ old('last_name') }}">
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email">
+                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
               </div>
               <div class="form-group">
                 <label for="message">Message</label>
-                <textarea cols="30" rows="10" class="form-control" id="message" name="message"></textarea>
+                <textarea cols="30" rows="10" class="form-control" id="message" name="message">{{ old('message') }}</textarea>
               </div>
               <div class="form-group">
                 <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Send Message">

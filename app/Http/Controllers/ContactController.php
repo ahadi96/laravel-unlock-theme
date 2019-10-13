@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ContactUs;
+use App\Http\Requests\ContactUsRequest;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -12,7 +13,7 @@ class ContactController extends Controller
         return view('contact_us');
     }
 
-    public function store(Request $request)
+    public function store(ContactUsRequest $request)
     {
 
         // to return specific request value
@@ -42,10 +43,20 @@ class ContactController extends Controller
         // ]);
 
         // the third way
+        //$contact = ContactUs::create($request->all());
+
+        // server validate data 
+        // $request->validate([
+        //     'first_name' => 'required',
+        //     'last_name' => 'required',
+        //     'email' => 'required',
+        //     'message' => 'required|min:10'
+        // ]);
+
+        // insert data to database
         $contact = ContactUs::create($request->all());
 
         // redirect the request 
-
-        return redirect('contact-us')->with('success','Your message has been sent, and your message id is: #'.$contact->id);
+        return redirect('contact-us')->with('success', 'Your message has been sent, and your message id is: #' . $contact->id);
     }
 }
