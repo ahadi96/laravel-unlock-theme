@@ -22,18 +22,19 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <form action="#" method="post" class="probootstrap-form mb-5">
+          <form action="{{ url('contact-us') }}" method="post" class="probootstrap-form mb-5">
+            @csrf
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="fname">First Name</label>
-                    <input type="text" class="form-control" id="fname" name="fname">
+                    <input type="text" class="form-control" id="fname" name="first_name">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="lname">Last Name</label>
-                    <input type="text" class="form-control" id="lname" name="lname">
+                    <input type="text" class="form-control" id="lname" name="last_name">
                   </div>
                 </div>
               </div>

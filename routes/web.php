@@ -14,7 +14,7 @@
 Route::get('/', 'HomeController@home');
 Route::get('/services', 'HomeController@services');
 Route::get('/about', 'HomeController@about');
-Route::get('/contact-us', 'HomeController@contactUs');
+//Route::get('/contact-us', 'HomeController@contactUs');
 
 Route::get('query', 'HomeController@query');
 Route::get('category', 'HomeController@category');
@@ -38,3 +38,7 @@ Route::get('create-post', 'HomeController@createPost');
 Route::get('create-page', 'HomeController@createPage');
 
 Route::get('posts-countries','HomeController@postsByCountry');
+
+// contact us section 
+Route::get('contact-us','ContactController@index');
+Route::post('contact-us','ContactController@store');
