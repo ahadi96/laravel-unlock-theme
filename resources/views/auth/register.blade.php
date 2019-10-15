@@ -61,6 +61,25 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="country" class="col-md-4 col-form-label text-md-right">Country</label>
+
+                            <div class="col-md-6">
+                                <select name="country_id" class="form-control">
+                                    <option value="">Please select a country</option>
+                                    @foreach($countries as $country)
+                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
