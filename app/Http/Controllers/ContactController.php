@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+    
     public function index()
     {
         return view('contact_us');
@@ -57,6 +58,6 @@ class ContactController extends Controller
         $contact = ContactUs::create($request->all());
 
         // redirect the request 
-        return redirect('contact-us')->with('success', 'Your message has been sent, and your message id is: #' . $contact->id);
+        return redirect('contact')->with('success', 'Your message has been sent, and your message id is: #' . $contact->id);
     }
 }

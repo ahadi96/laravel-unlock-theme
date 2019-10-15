@@ -11,6 +11,11 @@
 |
 */
 
+// authentication routes 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/', 'HomeController@home');
 Route::get('/services', 'HomeController@services');
 Route::get('/about', 'HomeController@about');
@@ -40,5 +45,5 @@ Route::get('create-page', 'HomeController@createPage');
 Route::get('posts-countries','HomeController@postsByCountry');
 
 // contact us section 
-Route::get('contact-us','ContactController@index');
+Route::get('contact-us','ContactController@index')->middleware('isAdmin');
 Route::post('contact-us','ContactController@store');
